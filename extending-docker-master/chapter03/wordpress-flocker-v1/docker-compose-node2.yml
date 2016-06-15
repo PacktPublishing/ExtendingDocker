@@ -1,0 +1,24 @@
+wordpress:
+  container_name: my-wordpress-app
+  image: wordpress
+  ports: 
+    - "80:80"
+  links:
+    - mysql
+  environment:
+    - "constraint:flocker-node==2"
+    - "WORDPRESS_DB_HOST=mysql:3306"
+    - "WORDPRESS_DB_PASSWORD=password"
+  volume_driver: flocker
+  volumes:
+    - "uploads:/var/www/html/wp-content/uploads/"
+mysql:
+  container_name: my-wordpress-database
+  image: mariadb
+  environment:
+     - "constraint:flocker-node==2"
+     - "MYSQL_ROOT_PASSWORD=password"
+  command: mysqld --ignore-db-dir=lost+found
+  volume_driver: flocker
+  volumes:
+    - "database:/var/lib/mysql/"

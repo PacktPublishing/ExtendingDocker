@@ -1,0 +1,13 @@
+version: '2'
+services:
+  jenkins:
+    container_name: jenkins
+    image: jenkinsci/jenkins:2.0-beta-1
+    ports: 
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - "jenkins:/var/jenkins_home"
+volumes:
+  jenkins:
+    driver: local

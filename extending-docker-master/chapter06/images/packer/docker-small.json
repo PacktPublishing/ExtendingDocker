@@ -1,0 +1,31 @@
+{
+  "builders":[{
+    "type": "docker",
+    "image": "russmckendrick/base",
+    "export_path": "mobycounter-small.tar"
+  }],
+  "provisioners":[
+    {
+      "type": "file",
+      "source": "app",
+      "destination": "/srv/app"
+    }, 
+    {
+      "type": "file",
+      "source": "npmrc",
+      "destination": "/etc/npmrc"
+    }, 
+    {
+      "type": "shell",
+      "inline": [
+        "apk update",
+        "apk add --update nodejs",
+        "npm -g install npm",
+        "cd /srv/app",
+        "npm install",
+        "rm -rf /var/cache/apk/**/",
+        "npm cache clean"
+      ]
+    }
+  ]
+}

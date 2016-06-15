@@ -1,0 +1,37 @@
+version: '2'
+services:
+  wordpress:
+    container_name: "my-wordpress-app"
+    image: wordpress
+    ports: 
+      - "80:80"
+    environment:
+      WORDPRESS_DB_HOST: "mysql.weave.local:3306"
+      WORDPRESS_DB_PASSWORD: "password"
+    labels:
+      constraint: "node==chapter04-01"
+    hostname: "wordpress.weave.local"
+    dns: "172.17.0.1"
+    dns_search: "weave.local"
+    volumes:
+      - "uploads:/var/www/html/wp-content/uploads/"
+  mysql:
+    container_name: "my-wordpress-database"
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "password"
+    labels:
+      constraint: "node==chapter04-02"
+    hostname: "mysql.weave.local"
+    dns: "172.17.0.1"
+    dns_search: "weave.local"
+    volumes:
+      - "database:/var/lib/mysql"
+volumes:
+  uploads:
+    driver: local
+  database:
+    driver: local
+networks:
+  default:
+    driver: weave

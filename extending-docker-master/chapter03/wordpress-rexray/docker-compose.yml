@@ -1,0 +1,27 @@
+version: '2'
+services:
+  wordpress:
+    container_name: my-wordpress-app
+    image: wordpress
+    ports: 
+      - "80:80"
+    links:
+      - mysql
+    environment:
+      WORDPRESS_DB_HOST: "mysql:3306"
+      WORDPRESS_DB_PASSWORD: "password"
+    volumes:
+      - "uploads:/var/www/html/wp-content/uploads/"
+  mysql:
+    container_name: my-wordpress-database
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: "password"
+    command: mysqld --ignore-db-dir=lost+found
+    volumes:
+      - "database:/var/lib/mysql/"
+volumes:
+  uploads:
+    driver: rexray
+  database:
+    driver: rexray

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: nginxcluster
+spec:
+  replicas: 5
+  selector:
+    app: nginxcluster
+  template:
+    metadata:
+      name: nginxcluster
+      labels:
+        app: nginxcluster
+    spec:
+      containers:
+      - name: nginxcluster
+        image: russmckendrick/cluster
+        ports:
+        - containerPort: 80

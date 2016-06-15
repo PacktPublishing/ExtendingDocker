@@ -1,0 +1,45 @@
+---
+
+- name: "Provision two droplets in DigitalOcean"
+  hosts: localhost
+  connection: local
+  gather_facts: True
+
+  vars_files:
+    - group_vars/environment.yml
+    - group_vars/do.yml
+
+  roles:
+    - droplet
+
+- name: "Install Docker & Weave on our two DigitalOcean hosts"
+  hosts: dockerhosts
+  remote_user: root
+  gather_facts: False
+
+  vars_files:
+    - group_vars/environment.yml
+
+  roles: 
+    - docker-install
+    - weave-install
+
+- name: "Connect the two Weave hosts and start MySQL container"
+  hosts: dockerhost01
+  remote_user: root
+  gather_facts: False
+
+  vars_files:
+    - group_vars/environment.yml
+
+  roles: 
+    - weave-connect
+    - docker-mysql
+
+- name: "Start the Wordpress container"
+  hosts: dockerhost02
+  remote_user: root
+  gather_facts: False
+
+  roles: 
+    - docker-wordpress

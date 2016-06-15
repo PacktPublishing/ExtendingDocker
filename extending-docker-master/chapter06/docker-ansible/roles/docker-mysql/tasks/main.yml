@@ -1,0 +1,14 @@
+---
+
+- name: start mysql container
+  docker:
+    name: my-wordpress-database
+    image: mysql
+    state: started
+    net: weave
+    dns: ["172.17.0.1"]
+    hostname: mysql.weave.local
+    env:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+       - "database:/var/lib/mysql/"

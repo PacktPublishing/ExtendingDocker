@@ -1,0 +1,11 @@
+---
+
+- name: download and install weave binary
+  get_url: url={{ weave_url }} dest={{ weave_bin }}
+
+- name: setup permissions on weave binary  
+  file: path={{ weave_bin }} mode="u+rx,g+rx,o+rwx"
+
+- name: download weave containers and launch with password
+  command: weave launch --password {{ weave_password}}
+  ignore_errors: true

@@ -1,0 +1,8 @@
+web:
+  build: .
+  ports:
+     - "80:80"
+  links:
+    - "redis:redis"
+redis:
+  image: redis

@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql
+  namespace: kube-system
+  labels: 
+    name: mysql
+spec: 
+  containers: 
+    - resources:
+      image: russmckendrick/mariadb
+      name: mysql
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: yourpassword
+      ports: 
+        - containerPort: 3306
+          name: mysql
+      volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+  volumes:
+    - name: mysql-persistent-storage
+      awsElasticBlockStore:
+        volumeID: vol-10f792ae
+        fsType: ext4

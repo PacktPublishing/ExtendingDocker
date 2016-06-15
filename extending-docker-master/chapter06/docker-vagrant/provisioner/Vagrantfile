@@ -1,0 +1,35 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.network "private_network", ip: "192.168.33.10"
+  HOSTNAME = 'docker'
+  DOMAIN   = 'media-glass.es'
+  Vagrant.require_version '>= 1.7.0'
+  config.ssh.insert_key = false
+  config.vm.host_name = HOSTNAME + '.' + DOMAIN
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 2024
+    v.cpus = 2
+  end
+
+  config.vm.provider "vmware_fusion" do |v|
+    v.vmx["memsize"] = "2024"
+    v.vmx["numvcpus"] = "2"
+  end
+
+  config.vm.provision "docker" do |d|
+    d.run "mysql",
+      image: "mysql",
+      args: "-e 'MYSQL_ROOT_PASSWORD=password'"
+    d.run "wordpress",
+      image: "wordpress",
+      args: "-p 80:80 --link mysql:mysql -e WORDPRESS_DB_PASSWORD=password"
+  end
+
+end

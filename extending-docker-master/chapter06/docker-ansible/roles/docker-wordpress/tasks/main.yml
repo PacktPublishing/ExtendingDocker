@@ -1,0 +1,23 @@
+---
+
+- include_vars: group_vars/dyn.yml
+
+- name: start wordpress container
+  docker:
+    name: my-wordpress-app
+    image: wordpress
+    state: started
+    net: weave
+    dns: ["172.17.0.1"]
+    hostname: wordpress.weave.local
+    ports:
+      - "80:80"
+    env:
+      WORDPRESS_DB_HOST: mysql.weave.local:3306
+      WORDPRESS_DB_PASSWORD: password
+    volumes:
+       - "uploads:/var/www/html/wp-content/uploads/"
+
+# Finished
+
+- debug: msg="You should be able to see a WordPress installation screen by going to http://{{ docker_host_02 }}"

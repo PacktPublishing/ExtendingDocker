@@ -1,0 +1,24 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.define "boot2docker", autostart: false do |dockerhost|
+    dockerhost.vm.box = "russmckendrick/boot2docker"
+    dockerhost.nfs.functional = false
+    dockerhost.vm.network :forwarded_port, guest: 80, host: 9999
+    dockerhost.ssh.shell = "sh"
+    dockerhost.ssh.username = "docker"
+    dockerhost.ssh.password = "tcuser"
+    dockerhost.ssh.insert_key = false
+  end
+
+  config.vm.define "nginx", primary: true do |v|
+    v.vm.provider "docker" do |d|
+      d.vagrant_vagrantfile = "./Vagrantfile"
+      d.vagrant_machine = "boot2docker"
+      d.image = "russmckendrick/nginx"
+      d.name  = "nginx"
+      d.ports = ["80:80"]
+    end
+  end
+
+end

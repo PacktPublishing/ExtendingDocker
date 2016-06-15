@@ -1,0 +1,66 @@
+---
+
+- name: ensure ssh key exists
+  user:
+    name: '{{ ansible_user_id }}'
+    generate_ssh_key: yes
+    ssh_key_file: '.ssh/id_rsa'
+
+- name: ensure key exists at DigitalOcean
+  digital_ocean:
+    state: present
+    command: ssh
+    name: '{{ ssh_key_name }}'
+    ssh_pub_key: '{{ lookup("file", "~/.ssh/id_rsa.pub") }}'
+    api_token: '{{ do_api_token }}'
+  register: do_ssh_key
+
+- name: start our first host
+  digital_ocean:
+    state: present
+    command: droplet
+    name: '{{ droplet_name }}-host01'
+    api_token: '{{ do_api_token }}'
+    size_id: '{{ size_id }}'
+    region_id: '{{ region_id }}'
+    image_id: '{{ image_id }}'
+    ssh_key_ids: '{{ do_ssh_key.ssh_key.id }}'
+    unique_name: 'yes'
+    wait_timeout: 500
+  register: host01
+
+- name: debug
+  debug: var=host01
+
+- name: Add new host to our inventory.
+  add_host:
+   name: "{{host01.droplet.ip_address}}"
+   groups: "dockerhosts,dockerhost01"
+  when: host01.droplet is defined
+
+- name: start our second host
+  digital_ocean:
+    state: present
+    command: droplet
+    name: '{{ droplet_name }}-host02'
+    api_token: '{{ do_api_token }}'
+    size_id: '{{ size_id }}'
+    region_id: '{{ region_id }}'
+    image_id: '{{ image_id }}'
+    ssh_key_ids: '{{ do_ssh_key.ssh_key.id }}'
+    unique_name: 'yes'
+    wait_timeout: 500
+  register: host02
+
+- name: debug
+  debug: var=host02
+
+- name: Add new host to our inventory.
+  add_host:
+   name: "{{ host02.droplet.ip_address }}"
+   groups: "dockerhosts,dockerhost02"
+  when: host02.droplet is defined
+
+- name: create the dynamic varible file for use later
+  template: src=dyn.yml.j2 dest=./group_vars/dyn.yml
+  delegate_to: localhost

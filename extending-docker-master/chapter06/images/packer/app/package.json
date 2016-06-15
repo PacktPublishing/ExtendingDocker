@@ -1,0 +1,21 @@
+{
+  "name": "moby-counter",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A simple app to demonstrate docker plugins for weave and flocker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concat-stream": "^1.4.8",
+    "ecstatic": "^0.8.0",
+    "minimist": "^1.1.1",
+    "pg": "^4.4.1",
+    "redis": "^0.12.1",
+    "routes-router": "^4.1.2"
+  }
+}

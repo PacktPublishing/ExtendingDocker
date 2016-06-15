@@ -1,0 +1,6 @@
+---
+
+ - include_vars: group_vars/dyn.yml
+
+ - name: download weave containers and launch with password
+   command: weave connect {{ docker_host_02 }}

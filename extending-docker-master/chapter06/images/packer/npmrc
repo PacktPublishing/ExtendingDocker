@@ -1,0 +1,10 @@
+bin-links=true
+dev=false
+optional=false
+
+prefix=/usr/local
+cache=/tmp/npm/cache
+tmp=/tmp/npm/tmp
+
+loglevel=warn
+color=false

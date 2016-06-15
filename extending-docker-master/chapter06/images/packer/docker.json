@@ -1,0 +1,21 @@
+{
+  "builders":[{
+    "type": "docker",
+    "image": "russmckendrick/nodejs",
+    "export_path": "mobycounter.tar"
+  }],
+  "provisioners":[
+    {
+      "type": "file",
+      "source": "app",
+      "destination": "/srv/app"
+    }, 
+    {
+      "type": "shell",
+      "inline": [
+        "cd /srv/app",
+        "npm install"
+      ]
+    }
+  ]
+}

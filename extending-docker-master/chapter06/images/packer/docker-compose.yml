@@ -1,0 +1,9 @@
+web:
+  image: mobycounter
+  ports:
+     - "80:80"
+  links:
+    - "redis:redis"
+  command: node /srv/app/index.js 
+redis:
+  image: redis

@@ -1,0 +1,28 @@
+---
+
+- name: install curl
+  apt: pkg=curl update_cache=yes
+
+- name: add docker apt keys
+  apt_key: keyserver=p80.pool.sks-keyservers.net id=58118E89F3A912897C070ADBF76221572C52609D
+
+- name: update apt
+  apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-trusty main' state=present
+
+- name: install Docker
+  apt: pkg=docker-engine update_cache=yes
+
+- name: start Docker
+  service: name=docker state=started
+
+- name: install pip
+  apt:
+    pkg: "{{ item }}"
+    state: installed
+  with_items:
+    - python-dev
+    - python-pip
+
+- name: install docker-py
+  pip:
+    name: docker-py
