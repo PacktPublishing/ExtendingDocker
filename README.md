@@ -1,7 +1,7 @@
 # ExtendingDocker
 By PacktPublishing
 
-This is the code repository for [Extending Docker](https://www.packtpub.com/networking-and-servers/extending-docker?utm_source=GitHub&utm_medium=Repository&utm_campaign=9781786463142), published by Packt Publishing. It contains all the required files to run the code.
+This is the code repository for [Extending Docker](https://www.packtpub.com/networking-and-servers/extending-docker?utm_source=GitHub&utm_medium=Repository&utm_campaign=9781786463142), published by [Packt Publishing](https://www.packtpub.com/). It contains all the required files to run the code.
 
 ##What you need for this book
 You will need either an OS X or Windows laptop or desktop PC that is capable of 
