@@ -1,4 +1,4 @@
-# ExtendingDocker
+# Extending Docker
 By PacktPublishing
 
 This is the code repository for [Extending Docker](https://www.packtpub.com/networking-and-servers/extending-docker?utm_source=GitHub&utm_medium=Repository&utm_campaign=9781786463142), published by [Packt Publishing](https://www.packtpub.com/). It contains all the required files to run the code.
