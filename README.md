@@ -1,12 +1,17 @@
+
+![Packt](https://media.glassdoor.com/sql/438946/packt-squarelogo-1474954463150.png)
 # Extending Docker
 By PacktPublishing
 
 This is the code repository for [Extending Docker](https://www.packtpub.com/networking-and-servers/extending-docker?utm_source=GitHub&utm_medium=Repository&utm_campaign=9781786463142), published by [Packt Publishing](https://www.packtpub.com/). It contains all the required files to run the code.
 
+
 ##What you need for this book
+
 You will need either an OS X or Windows laptop or desktop PC that is capable of 
 running VirtualBox (https://www.virtualbox.org/) and has access to both Amazon 
 Web Service and DigitalOcean accounts with permissions to launch resources.
+
 
 ##Related Books
 
