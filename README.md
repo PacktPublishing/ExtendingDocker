@@ -18,3 +18,7 @@ Web Service and DigitalOcean accounts with permissions to launch resources.
 * [Mastering Docker](https://www.packtpub.com/virtualization-and-cloud/mastering-docker?utm_source=GitHub&utm_medium=Repository&utm_campaign=9781785287039)
 * [Docker](https://www.packtpub.com/virtualization-and-cloud/docker?utm_source=GitHub&utm_medium=Repository&utm_campaign=9781786465931)
 * [Docker High Performance](https://www.packtpub.com/networking-and-servers/docker-high-performance?utm_source=GitHub&utm_medium=Repository&utm_campaign=9781785886805)
+### Download a free PDF
+
+ <i>If you have already purchased a print or Kindle version of this book, you can get a DRM-free PDF version at no cost.<br>Simply click on the link to claim your free PDF.</i>
+<p align="center"> <a href="https://packt.link/free-ebook/9781786463142">https://packt.link/free-ebook/9781786463142 </a> </p>
